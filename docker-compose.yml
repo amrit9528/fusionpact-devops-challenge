@@ -6,6 +6,8 @@ services:
     container_name: fusion-backend
     ports:
       - "8000:8000"
+    volumes:
+      - backend_data:/app/data
     restart: always
 
   frontend:
@@ -24,6 +26,7 @@ services:
       - "9090:9090"
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
     depends_on:
       - backend
     restart: always
@@ -33,6 +36,8 @@ services:
     container_name: grafana
     ports:
       - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
     depends_on:
       - prometheus
     restart: always
@@ -56,3 +61,8 @@ services:
       - /var/lib/docker:/var/lib/docker:ro
     privileged: true
     restart: always
+
+volumes:
+  backend_data:
+  prometheus_data:
+  grafana_data:
