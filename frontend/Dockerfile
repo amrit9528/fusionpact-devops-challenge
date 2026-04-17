@@ -4,6 +4,6 @@ RUN rm -rf /usr/share/nginx/html/*
 
 COPY . /usr/share/nginx/html
 
-EXPOSE 8000
+EXPOSE 8001
 
 CMD ["nginx", "-g", "daemon off;"]
